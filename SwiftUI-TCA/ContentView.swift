@@ -14,7 +14,7 @@ struct ContentView: View {
             Form {
                 Section {
                     NavigationLink("Basics") {
-                        Demo(store: Store(initialState: Counter.State()) { Counter() }) { store in
+                        Demo(store: Store(initialState: CounterFeature.State()) { CounterFeature() }) { store in
                             CounterDemoView(store: store)
                         }
                     }
