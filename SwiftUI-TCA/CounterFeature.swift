@@ -38,46 +38,37 @@ struct CounterView: View {
     let store: StoreOf<CounterFeature>
     
     var body: some View {
-        HStack {
-            Button {
-                store.send(.decrementButtonTapped)
-            } label: {
-                Image(systemName: "minus")
-            }
-            
+        VStack {
             Text("\(store.count)")
-                .monospacedDigit()
-            
-            Button {
-                store.send(.incrementButtonTapped)
-            } label: {
-                Image(systemName: "plus")
+                .font(.largeTitle)
+                .padding()
+                .background(Color.black.opacity(0.1))
+                .cornerRadius(10)
+            HStack {
+                Button("-") {
+                    store.send(.decrementButtonTapped)
+                }
+                .font(.largeTitle)
+                .padding()
+                .background(Color.black.opacity(0.1))
+                .cornerRadius(10)
+                
+                Button("+") {
+                    store.send(.incrementButtonTapped)
+                }
+                .font(.largeTitle)
+                .padding()
+                .background(Color.black.opacity(0.1))
+                .cornerRadius(10)
             }
         }
-    }
-}
-
-struct CounterDemoView: View {
-    let store: StoreOf<CounterFeature>
-    
-    var body: some View {
-        Form {
-            Section {
-                CounterView(store: store)
-                    .frame(maxWidth: .infinity)
-            }
-        }
-        .buttonStyle(.borderless)
-        .navigationTitle("Counter demo")
     }
 }
 
 #Preview {
-    NavigationStack {
-        CounterDemoView(
-            store: Store(initialState: CounterFeature.State()) {
-                CounterFeature()
-            }
-        )
-    }
+    CounterView(
+        store: Store(initialState: CounterFeature.State()) {
+            CounterFeature()
+        }
+    )
 }
